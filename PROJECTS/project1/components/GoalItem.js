@@ -1,39 +1,26 @@
 import { View, Text } from "react-native";
 import { StyleSheet } from "react-native";
-export default function GoalItem() {
+
+export default function GoalItem(props) {
   return (
-    <View style={styles.goalsContainer}>
-      <Text>List of goals... </Text>
-      {courseGoals.map((goal) => (
-        <Text key={goal} style={styles.goalList}>
-          {goal}
-        </Text>
+    <View>
+      {props.goals.map((goal) => (
+        <View key={goal.id} style={styles.goalItem}>
+          <Text style={styles.goalText}>{goal.text}</Text>
+        </View>
       ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  goalsContainer: {
-    margin: 10,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    borderWidth: 2,
-    borderRadius: 10,
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: "#5e0acc",
   },
-
-  goalList: {
-    width: "150",
-    margin: 10,
-    color: "#fff",
-    borderWidth: 2,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    padding: 5,
-    backgroundColor: "rgb(57, 45, 196)",
-    borderRadius: 10,
+  goalText: {
+    color: "white",
   },
 });

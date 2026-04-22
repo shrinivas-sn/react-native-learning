@@ -12,12 +12,12 @@ export default function App() {
   function addGoalHandler() {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
-      enteredGoalText,
+      { text: enteredGoalText, id: Math.random().toString() },
     ]);
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
@@ -25,29 +25,38 @@ export default function App() {
           onChangeText={goalInputHandler}
         />
         <Button title="Add Goal" onPress={addGoalHandler} />
-        <GoalItem />
+      </View>
+      <View style={styles.goalsContainer}>
+        <GoalItem goals={courseGoals} />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    color: "blue",
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    margin: 20,
-    padding: 20,
-    borderBottomWidth: 0.5,
+  appContainer: {
+    flex: 1,
+    paddingTop: 50,
+    paddingHorizontal: 16,
   },
-
+  inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
+  },
   textInput: {
-    margin: 10,
-    borderRadius: 10,
-    width: "90%",
-    borderWidth: 2,
-    borderColor: "blue",
+    borderWidth: 1,
+    borderColor: "#cccccc",
+    width: "70%",
+    marginRight: 8,
+    padding: 8,
+    borderRadius: 6,
+  },
+  goalsContainer: {
+    flex: 5,
   },
 });
