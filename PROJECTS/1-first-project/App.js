@@ -7,7 +7,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const AppContext = createContext();
 const Tab = createBottomTabNavigator();
 
-// --- SCREEN 1: HOME ---
 function HomeScreen() {
   const { logs } = useContext(AppContext);
   return (
@@ -21,7 +20,6 @@ function HomeScreen() {
   );
 }
 
-// --- SCREEN 2: LOG ACTIVITY ---
 function LogScreen({ navigation }) {
   const { addLog } = useContext(AppContext);
   const [mood, setMood] = useState('');
@@ -41,16 +39,15 @@ function LogScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.screenContainer}>
-      {/* KeyboardAvoidingView prevents the keyboard from hiding the inputs */}
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ width: '100%', alignItems: 'center' }}>
         <Text style={styles.title}>New Entry</Text>
         <View style={styles.card}>
           <Text style={styles.label}>Mood (e.g., Happy, Tired):</Text>
           <TextInput style={styles.input} value={mood} onChangeText={setMood} placeholder="How are you feeling?" />
-          
+
           <Text style={styles.label}>Journal Notes:</Text>
           <TextInput style={[styles.input, styles.textArea]} value={notes} onChangeText={setNotes} placeholder="What did you do today?" multiline />
-          
+
           <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
             <Text style={styles.buttonText}>Save Entry</Text>
           </TouchableOpacity>
@@ -60,11 +57,11 @@ function LogScreen({ navigation }) {
   );
 }
 
-// --- SCREEN 3: HISTORY (Introducing FlatList!) ---
+
 function HistoryScreen() {
   const { logs } = useContext(AppContext);
 
-  // This function tells FlatList how to render ONE item
+
   const renderItem = ({ item }) => (
     <View style={styles.historyCard}>
       <Text style={styles.historyMood}>Mood: {item.mood}</Text>
@@ -78,11 +75,10 @@ function HistoryScreen() {
       {logs.length === 0 ? (
         <Text style={styles.subText}>No entries yet. Go log one!</Text>
       ) : (
-        // FlatList replaces .map() for mobile lists
         <FlatList
-          data={logs} // The array of data
-          keyExtractor={(item) => item.id} // The unique key
-          renderItem={renderItem} // The component to render
+          data={logs}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
           contentContainerStyle={{ paddingBottom: 20, width: '100%' }}
         />
       )}
@@ -90,13 +86,12 @@ function HistoryScreen() {
   );
 }
 
-// --- MAIN APP COMPONENT ---
 export default function App() {
   // Global State
   const [logs, setLogs] = useState([]);
 
   const addLog = (newLog) => {
-    setLogs([newLog, ...logs]); // Adds new log to the top of the array
+    setLogs([newLog, ...logs]);
   };
 
   return (
