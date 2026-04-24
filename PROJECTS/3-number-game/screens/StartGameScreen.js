@@ -3,11 +3,13 @@ import PrimaryButtons from "../components/PrimaryButtons";
 import { StyleSheet } from 'react-native';
 export default function StartGameScreen() {
     return (
+
         <View style={styles.inputContainer}>
-            <TextInput style={styles.numberInput} maxLength={2} />
+            <TextInput style={styles.numberInput} maxLength={2} keyboardType="number-pad" />
             <PrimaryButtons>Reset</PrimaryButtons>
             <PrimaryButtons>Confirm</PrimaryButtons>
         </View>
+
     );
 }
 
