@@ -50,6 +50,10 @@ function LocationPicker({ onPickLocation }) {
   }, [pickedLocation, onPickLocation]);
 
   async function verifyPermissions() {
+    if (!locationPermissionInformation) {
+      return false;
+    }
+
     if (
       locationPermissionInformation.status === PermissionStatus.UNDETERMINED
     ) {

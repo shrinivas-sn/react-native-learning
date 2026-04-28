@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 
 import { Colors } from '../../constants/colors';
 import { Place } from '../../models/place';
@@ -25,6 +25,11 @@ function PlaceForm({onCreatePlace}) {
   }, []);
 
   function savePlaceHandler() {
+    if (!enteredTitle || !selectedImage || !pickedLocation) {
+      Alert.alert('Invalid input', 'Please provide a title, an image, and a location before saving.');
+      return;
+    }
+
     const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
     onCreatePlace(placeData);
   }
